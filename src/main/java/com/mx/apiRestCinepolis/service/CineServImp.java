@@ -1,5 +1,6 @@
 package com.mx.apiRestCinepolis.service;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,23 +32,35 @@ public class CineServImp implements CineServ {
 		
 		return  (List<Cinepolis>) dao.findAll(); 
 	}
-
+	  @Transactional(readOnly = true)
 	@Override
 	public Cinepolis buscarXid(int idCine) {
-		// TODO Auto-generated method stub
-		return null;
+		Cinepolis peliEncontrada = dao.findById(idCine).orElse(null);
+		return peliEncontrada;
 	}
-
+	  @Transactional
 	@Override
-	public void editar(Cinepolis cine) {
-		// TODO Auto-generated method stub
+	public void editar(Cinepolis cinepolis) {
+		dao.save(cinepolis);
 		
 	}
-
+	  @Transactional
 	@Override
 	public void eliminarXid(int idCinep) {
-		// TODO Auto-generated method stub
+		dao.deleteById(idCinep);
 		
+	}
+	@Transactional(readOnly = true)
+	@Override
+	public List<Cinepolis> buscarXnombre(String nombre) {
+		List<Cinepolis> lista = dao.findByNombre(nombre);
+		return lista;
+	}
+	@Transactional(readOnly = true)
+	@Override
+	public List<Cinepolis> buscarXgenero(String genero) {
+		List<Cinepolis>lista = dao.findByGenero(genero);
+		return lista;
 	}
 
 }

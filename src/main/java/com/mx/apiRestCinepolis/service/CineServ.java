@@ -12,5 +12,8 @@ public interface CineServ {
 	public Cinepolis buscarXid(int idCine);
 	public void editar(Cinepolis  cinepolis);
 	public void eliminarXid(int idCinep);
+	
+	public List<Cinepolis> buscarXnombre(String nombre);
+	public List<Cinepolis> buscarXgenero(String genero);
 
 }
